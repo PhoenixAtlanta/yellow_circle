@@ -34,8 +34,9 @@ class YellowCircle(QMainWindow, Ui_MainWindow):
 
     def draw_circle(self, qp):
         # Задаем кисть
-        qp.setBrush(QColor("yellow"))
+        color = (randint(0, 255) for _ in range(3))  # случайный цвет
         radius = randint(10, 200)  # создаем радиус
+        qp.setBrush(QColor(*color))
         qp.drawEllipse(self.size().width() // 2 - (radius // 2), self.size().height() // 2 - (radius // 2),
                        radius, radius)  # рисуем круг по центру экрана
         qp.setBrush(QColor(0, 255, 0))
