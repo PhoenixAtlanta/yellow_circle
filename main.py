@@ -1,5 +1,6 @@
 import sys
 from random import randint
+from PyQt5 import uic  # Импортируем uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QPainter, QColor
 from UI import Ui_MainWindow
@@ -12,7 +13,9 @@ def except_hook(cls, exception, traceback):
 class YellowCircle(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        uic.loadUi('UI.ui', self)  # Загружаем дизайн
+        self.btn_add.clicked.connect(self.check_draw)
+
         self.value_draw = False
 
         self.btn_add.clicked.connect(self.check_draw)
@@ -28,8 +31,7 @@ class YellowCircle(QMainWindow, Ui_MainWindow):
             # Начинаем процесс рисования
             qp.begin(self)
             self.draw_circle(qp)
-            # Завершаем рисование
-            qp.end()
+            qp.end()  # Завершаем рисование
             self.value_draw = False
 
     def draw_circle(self, qp):
